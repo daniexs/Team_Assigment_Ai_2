@@ -23,7 +23,7 @@ if file is not None:
     img = Image.open(file).convert("RGB")
     st.image(img, caption="Gambar yang diunggah", use_container_width=True)
     st.image(ImageOps.fit(img.convert("RGB"), (32, 32), Image.LANCZOS).resize((160, 160), Image.NEAREST),
-               caption="What the model sees (32x32)")
+               caption="Apa yang dilihat oleh model (32x32)")
     # Preprocessing: crop tengah dan resize ke 32x32.
     # Normalisasi 1/255 sudah ada di dalam model, jadi tidak dilakukan di sini.
     img_small = ImageOps.fit(img, (32, 32), Image.LANCZOS)
