@@ -14,7 +14,7 @@ def load_model():
 model = load_model()
 
 st.title("Klasifikasi Gambar CIFAR-10 dengan CNN")
-st.write("Upload gambar, lalu model akan memprediksi kelasnya.")
+st.write("Upload gambar, model akan memprediksi kelasnya.")
 st.caption("Kelas yang dikenali: " + ", ".join(CLASS_NAMES))
 
 file = st.file_uploader("Pilih gambar", type=["jpg", "jpeg", "png"])
@@ -22,7 +22,8 @@ file = st.file_uploader("Pilih gambar", type=["jpg", "jpeg", "png"])
 if file is not None:
     img = Image.open(file).convert("RGB")
     st.image(img, caption="Gambar yang diunggah", use_container_width=True)
-
+    st.image(ImageOps.fit(img.convert("RGB"), (32, 32), Image.LANCZOS).resize((160, 160), Image.NEAREST),
+               caption="What the model sees (32x32)")
     # Preprocessing: crop tengah dan resize ke 32x32.
     # Normalisasi 1/255 sudah ada di dalam model, jadi tidak dilakukan di sini.
     img_small = ImageOps.fit(img, (32, 32), Image.LANCZOS)
